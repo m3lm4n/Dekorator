@@ -17,7 +17,7 @@ class ValueModel(models.Model):
 		unique_together = ("attr", "item")
 
 class ReservationModel(models.Model):
-    item    = models.ForeignKey(ItemModel, null=False, blank=False)
+    item    = models.ForeignKey(ItemModel, null=True, blank=True)
     date    = models.DateField(null=False, blank=False)
     name    = models.CharField(max_length=255, null=False, blank=False)
 
@@ -27,7 +27,7 @@ class RentModel(models.Model):
 	paid	= models.BooleanField(null=False, blank=True, default=False)
 
 class ReturnModel(models.Model):
-	rent    = models.ForeignKey(RentModel, null=False, blank=False)
-	date    = models.DateField(null=False, blank=False)
+	rent    = models.ForeignKey(RentModel, null=True, blank=True)
+	date    = models.DateField(null=True, blank=True)
 
 

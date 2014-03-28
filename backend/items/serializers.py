@@ -11,14 +11,18 @@ class ItemSerializer(serializers.ModelSerializer):
         model = logics.Item
 
 class ReservationSerializer(serializers.ModelSerializer):
-	#item = ItemSerializer()
+	item = ItemSerializer()
 
 	class Meta:
 		model = logics.Reservation
-		fields = ('id', 'name', 'date')
+		#fields = ('id', 'name', 'date')
 
 class RentItemSerializer(serializers.ModelSerializer):
 	res = ReservationSerializer()
 
 	class Meta:
 		model = models.RentModel
+
+class ReturnItemSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = models.ReturnModel

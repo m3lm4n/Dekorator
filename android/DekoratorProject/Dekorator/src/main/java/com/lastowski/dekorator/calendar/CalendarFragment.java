@@ -64,7 +64,13 @@ public class CalendarFragment extends Fragment {
                     TextView nameDialog = (TextView) popUp.findViewById(R.id.name_dialog);
                     nameDialog.setText(ri.getName());
 
-                    addRentListener(ri.getId(), popUp.findViewById(R.id.rent_item));
+                    if(!ri.getItem().isAway()) {
+                        addRentListener(ri.getId(), popUp.findViewById(R.id.rent_item));
+                    }
+                    else {
+                        popUp.findViewById(R.id.rent_item).setAlpha(0.1f);
+                        popUp.findViewById(R.id.cancel).setAlpha(0.1f);
+                    }
                     popUp.setVisibility(View.VISIBLE);
                     popUp.postInvalidate();
                     calendarTitle.setVisibility(View.GONE);

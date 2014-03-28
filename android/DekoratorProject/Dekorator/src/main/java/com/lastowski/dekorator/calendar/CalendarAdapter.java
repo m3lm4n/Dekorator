@@ -131,6 +131,7 @@ public class CalendarAdapter extends BaseAdapter{
             if(mReservations.containsKey(calendar.get(Calendar.MONTH))){
                 HashMap<Integer, ReservationItem> month = mReservations.get(calendar.get(Calendar.MONTH));
                 if(month.containsKey(day)){
+                    ReservationItem res = month.get(day);
                     view.setBackgroundColor(mContext.getResources().getColor(R.color.red));
                     vh.dayNumber.setTextColor(mContext.getResources().getColor(R.color.white));
                 }

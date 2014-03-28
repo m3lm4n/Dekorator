@@ -12,6 +12,7 @@ public class RequestFactory {
     public static final int REQUEST_TYPE_RESERVATIONS = 3;
     public static final int REQUEST_TYPE_ADD_RESERVATION = 4;
     public static final int REQUEST_TYPE_RENT_ITEM = 5;
+    public static final int REQUEST_TYPE_RETURN_ITEM = 6;
 
     public static Request getCatalogItems(){
         Request request = new Request(REQUEST_TYPE_CATALOG_ITEMS);
@@ -20,6 +21,12 @@ public class RequestFactory {
 
     public static Request getSpecificItem(int id){
         Request request = new Request(REQUEST_TYPE_SPECIFIC_ITEM);
+        request.put(Utils.Const.RequestParam.ITEM_ID, id);
+        return request;
+    }
+
+    public static Request returnItem(int id){
+        Request request = new Request(REQUEST_TYPE_RETURN_ITEM);
         request.put(Utils.Const.RequestParam.ITEM_ID, id);
         return request;
     }

@@ -10,6 +10,7 @@ import com.lastowski.dekorator.R;
 import com.lastowski.dekorator.Utils;
 import com.lastowski.dekorator.api.CommsActivity;
 import com.lastowski.dekorator.api.RequestFactory;
+import com.lastowski.dekorator.catalog.CatalogItem;
 import com.lastowski.dekorator.reservations.AddReservationActivity;
 import com.lastowski.dekorator.reservations.ReservationActivity;
 
@@ -53,10 +54,18 @@ public class SpecificItemActivity extends CommsActivity implements RequestManage
 
     @Override
     public void onRequestFinished(Request request, Bundle bundle) {
-        SpecificItem item = bundle.getParcelable(Utils.Const.Response.SPECIFIC_ITEM);
+        if(request.getRequestType() == RequestFactory.REQUEST_TYPE_RETURN_ITEM){
+            Intent intent = new Intent(SpecificItemActivity.this, SpecificItemActivity.class);
+            intent.putExtra(Utils.Const.BundleExtra.ITEM_ID, itemId);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            SpecificItem item = bundle.getParcelable(Utils.Const.Response.SPECIFIC_ITEM);
 
-        SpecificItemFragment fragment = (SpecificItemFragment) getFragmentManager().findFragmentById(R.id.specific_item_fragment);
-        fragment.setItemInfo(item);
+            SpecificItemFragment fragment = (SpecificItemFragment) getFragmentManager().findFragmentById(R.id.specific_item_fragment);
+            fragment.setItemInfo(item);
+        }
     }
 
     @Override
@@ -71,6 +80,12 @@ public class SpecificItemActivity extends CommsActivity implements RequestManage
 
     @Override
     public void onRequestCustomError(Request request, Bundle bundle) {
+
+    }
+
+    public void returnItem(int itemId) {
+        Request request = RequestFactory.returnItem(itemId);
+        startApiRequest(request, this);
 
     }
 }

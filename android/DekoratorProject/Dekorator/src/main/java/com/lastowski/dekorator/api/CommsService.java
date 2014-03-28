@@ -5,6 +5,7 @@ import com.lastowski.dekorator.api.operations.AddReservationOperation;
 import com.lastowski.dekorator.api.operations.ItemReservationsOperation;
 import com.lastowski.dekorator.api.operations.ItemsOperation;
 import com.lastowski.dekorator.api.operations.RentItemOperation;
+import com.lastowski.dekorator.api.operations.ReturnItemOperation;
 import com.lastowski.dekorator.api.operations.SpecificItemsOperation;
 
 /**
@@ -29,6 +30,9 @@ public class CommsService extends RequestService {
                 break;
             case RequestFactory.REQUEST_TYPE_RENT_ITEM:
                 returnOperation = new RentItemOperation();
+                break;
+            case RequestFactory.REQUEST_TYPE_RETURN_ITEM:
+                returnOperation = new ReturnItemOperation();
                 break;
         }
         return returnOperation;

@@ -39,7 +39,7 @@ class ReservationResource(GenericAPIView):
 
     def get(self, request, item_pk=None):
         if item_pk:
-            reservation = logics.Reservation.objects.filter(pk = item_pk)
+            reservation = logics.Reservation.objects.filter(item_id = item_pk)
             serializer = self.get_serializer(instance=reservation, many=True)
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -47,7 +47,7 @@ class ReservationResource(GenericAPIView):
     def post(self, request, item_pk=None):
         if item_pk:
             item = logics.Item.objects.get(pk=item_pk)
-            serializer = self.get_serializer(data=request.DATA)
+            serializer = self.get_serializer(data=request.DATA, partial=True)
             if serializer.is_valid():
                 serializer.object.item = item
                 serializer.object.save()
@@ -81,15 +81,16 @@ class RentItemResource(GenericAPIView):
         return Reservation(status=status.HTTP_404_NOT_FOUND)
 
 class ReturnItemResource(GenericAPIView):
-    serializer_class = serializers.RentItemSerializer
+    serializer_class = serializers.ReturnItemSerializer
 
     def post(self, request, item_pk):
         if item_pk:
             try:
                 item = logics.Item.objects.get(pk=item_pk)
 
-                rent = models.RentModel.objects.get(res__item__id = item_pk)
-                rent.delete()
+                rent = models.RentModel.objects.filter(res__item__id = item_pk).all()
+                for r in rent:
+                    r.delete()
                 item.away = False
                 item.save()
                 return Response(status=status.HTTP_200_OK)

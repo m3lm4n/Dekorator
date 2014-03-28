@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
+import com.lastowski.dekorator.item.SpecificItem;
 
 /**
  * Created by adamastowski on 01.01.2014.
@@ -18,6 +19,17 @@ public class ReservationItem implements Parcelable{
 
     @Expose(serialize = true, deserialize = true)
     String date;
+
+    @Expose(serialize = false, deserialize = false)
+    SpecificItem item;
+
+    public SpecificItem getItem() {
+        return item;
+    }
+
+    public void setItem(SpecificItem item) {
+        this.item = item;
+    }
 
     public int getId() {
         return id;
@@ -56,6 +68,7 @@ public class ReservationItem implements Parcelable{
         id = in.readInt();
         name = in.readString();
         date = in.readString();
+        item = in.readParcelable(SpecificItem.class.getClassLoader());
     }
 
 
@@ -69,7 +82,7 @@ public class ReservationItem implements Parcelable{
         dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(date);
-
+        dest.writeParcelable(item, flags);
     }
 
     public static final Parcelable.Creator<ReservationItem> CREATOR
