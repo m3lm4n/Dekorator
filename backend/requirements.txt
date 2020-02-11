@@ -1,6 +1,6 @@
 Chameleon==2.11
 Cython==0.19.1
-Django==1.5.1
+Django==1.11.28
 Fabric==1.5.3
 Jinja2==2.6
 Mako==0.8.0
