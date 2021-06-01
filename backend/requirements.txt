@@ -120,7 +120,7 @@ stevedore==0.8
 sure==0.10.3
 translationstring==1.1
 uWSGI==1.2.3
-urllib3==1.4
+urllib3==1.26.5
 urwid==1.1.1
 vboxapi==1.0
 venusian==1.0a8
