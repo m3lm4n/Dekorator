@@ -22,7 +22,7 @@ anyjson==0.3.3
 bdist-mpkg==0.4.4
 billiard==2.7.3.28
 bonjour-py==0.3
-celery==3.0.13
+celery==5.2.2
 coverage==3.5.2
 distribute==0.6.36
 django-celery==3.0.9
