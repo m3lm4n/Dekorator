@@ -3,7 +3,7 @@ Cython==0.19.1
 Django==1.5.1
 Fabric==1.5.3
 Jinja2==2.6
-Mako==0.8.0
+Mako==1.2.2
 MarkupSafe==0.15
 PIL==1.1.7
 PasteDeploy==1.5.0
